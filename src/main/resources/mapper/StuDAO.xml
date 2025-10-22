@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.IstuDAO">
+    <select id="findstudent" resultType="VO.stu">
+        select * from suwork.#{id}_#{classname} limit #{startindex},#{recordnum}
+    </select>
+    <select id="findstudentByID" resultType="VO.stu">
+        select * from suwork.#{id}_#{classname} where stu_id=#{StuId}
+    </select>
+    <select id="findstudentByName" resultType="VO.stu">
+        select * from suwork.#{id}_#{classname} where stu_name like %#{name}% limit #{startindex},#{recordnum}
+    </select>
+    <select id="getCount" resultType="int">
+       select count(*) from suwork.#{id}_#{classname}
+    </select>
+    <select id="getCountByName" resultType="int">
+        select count(*) from suwork.#{id}_#{classname} where stu_name=#{name}
+    </select>
+    <insert id="addstudent">
+        insert into suwork.#{id}_#{classname} (`stu_id`, `stu_name`, `sex`, `tw_time`, `kq_time`, `qq_time`, `allgrade`)
+        values (#{s.getStuId()},#{s.getStuName()},#{s.getStuSex()},#{s.gettwtime()},#{s.getkqtime()},#{s.getqqtime()},#{s.getallgrade()})
+    </insert>
+    <update id="updatestudent">
+        update suwork.#{id}_#{classname} set
+        stu_id=#{s.getStuId()},
+        stu_name=#{s.getStuName()},
+        sex=#{s.getStuSex()},
+        tw_time=#{s.gettwtime()},
+        kq_time=#{s.getkqtime()},
+        qq_time=#{s.getqqtime()},
+        allgrade=#{s.getallgrade()} where stu_id=#{afterId}
+    </update>
+    <delete id="deletestudent">
+        delete
+        from suwork.#{id}_#{classname}
+        where stu_id=#{StuId};
+    </delete>
+<!--    <select id="query" resultType="mybatis.pojo.classinfo">-->
+<!--        select * from tb_class where 1=1-->
+<!--        <if test="id!=0">-->
+<!--            AND id=#{id}-->
+<!--        </if>-->
+<!--        <if test="name!=null">-->
+<!--            AND name=#{name}-->
+<!--        </if>-->
+<!--        <if test="count!=-1">-->
+<!--            AND count=#{count}-->
+<!--        </if>-->
+<!--    </select>-->
+</mapper>
