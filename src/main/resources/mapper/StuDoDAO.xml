@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.IstuDoDAO">
+    <select id="findstudent" resultType="VO.stu">
+        select * from suwork.#{id}_#{classname}
+    </select>
+    <update id="qqDoStudent">
+        update suwork.#{id}_#{classname} set
+        kq_time=#{kqtime},
+        qq_time=#{qqtime}
+        where (stu_id=#{StuId})
+    </update>
+    <select id="findstudentById" resultType="VO.stu">
+        select * from suwork.#{id}_#{classname}
+        where stu_id=#{StuId}
+    </select>
+
+</mapper>
